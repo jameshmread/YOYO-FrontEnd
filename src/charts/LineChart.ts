@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { HttpService } from "../../services/HttpService";
+import { HttpService } from "../services/HttpService";
 import { ChartColours } from "./ChartColours";
 import { LineChartFilters } from "../dataFilters/LineChartFilters";
 

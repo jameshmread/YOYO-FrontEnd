@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
-import { HttpService } from "../../services/HttpService";
-import { ChartTypes } from "../ChartTypes";
+import { HttpService } from "../services/HttpService";
+import { ChartTypes } from "../charts/ChartTypes";
 import { Filter } from "./Filter";
 import { MathsFunctions } from "../maths/MathsFunctions";
 

@@ -5,12 +5,18 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
-import { SelectButtonModule } from "primeng/primeng";
+import { SelectButtonModule, ChartModule } from "primeng/primeng";
 
 import { AppComponent } from "./app.component";
+import { LineChart } from "../charts/LineChart";
+import { LineChartFilters } from "../dataFilters/LineChartFilters";
+import { HttpService } from "../services/HttpService";
+import { HttpModule } from "@angular/http";
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LineChart
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
@@ -19,9 +25,14 @@ import { AppComponent } from "./app.component";
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    SelectButtonModule
+    SelectButtonModule,
+    ChartModule
   ],
-  providers: [],
+  providers: [
+    LineChartFilters,
+    HttpService,
+    HttpModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
