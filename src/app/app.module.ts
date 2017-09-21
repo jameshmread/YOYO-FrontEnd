@@ -1,9 +1,11 @@
 import "reflect-metadata";
 import "zone.js/dist/zone";
+import "rxjs/add/operator/map";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 import { SelectButtonModule, ChartModule } from "primeng/primeng";
 
@@ -11,7 +13,6 @@ import { AppComponent } from "./app.component";
 import { LineChart } from "../charts/LineChart";
 import { LineChartFilters } from "../dataFilters/LineChartFilters";
 import { HttpService } from "../services/HttpService";
-import { HttpModule } from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -26,12 +27,12 @@ import { HttpModule } from "@angular/http";
     BrowserAnimationsModule,
     FormsModule,
     SelectButtonModule,
-    ChartModule
+    ChartModule,
+    HttpClientModule
   ],
   providers: [
     LineChartFilters,
-    HttpService,
-    HttpModule
+    HttpService
   ],
   bootstrap: [AppComponent]
 })

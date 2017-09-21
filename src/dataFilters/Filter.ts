@@ -13,8 +13,8 @@ export class Filter {
         chartType: string
     ) {
         this.chartLabels = labels;
-        this.chartTitle = chartTitle
-        this.dataSetLabels = dataSetLabels
+        this.chartTitle = chartTitle;
+        this.dataSetLabels = dataSetLabels;
         this.chartData = chartData;
         this.chartType = chartType;
     }

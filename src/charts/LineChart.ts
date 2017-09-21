@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 import { HttpService } from "../services/HttpService";
 import { ChartColours } from "./ChartColours";
@@ -16,10 +16,40 @@ export class LineChart {
   public data;
   public options;
 
+  public ngOninit () {
+    this.setBlankChart();
+  }
+
   constructor(private filters: LineChartFilters, private http: HttpService) {
-    this.filters.getTotalSales();
-    this.setChartData();
-    this.http.getData();
+    // this.filters.getTotalSales();
+    // this.setChartData();
+  }
+
+  private setBlankChart() {
+    this.type = ChartTypes.barChart;
+    this.data = {
+      labels: ["PlaceHolder 1", "PlaceHolder 2", "PlaceHolder 3"],
+      datasets: [
+        {
+          label: ["PlaceHolder 1", "PlaceHolder 2", "PlaceHolder 3"],
+          backgroundColor: ChartColours.red,
+          borderColor: ChartColours.redFull,
+          data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }
+      ]
+    };
+    this.options = {
+      title: {
+        display: true,
+        text: "PlaceHolder Title",
+        fontSize: 16
+      },
+      legend: {
+        position: "bottom"
+      },
+      responsive: true,
+      maintainAspectRatio: false
+    };
   }
 
   public setChartData () {

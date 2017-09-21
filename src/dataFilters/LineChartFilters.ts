@@ -8,12 +8,16 @@ import { MathsFunctions } from "../maths/MathsFunctions";
 @Injectable()
 export class LineChartFilters extends Filter {
 
-    data;
+    public data;
 
-    constructor(private http: HttpService){
+    constructor(private http: HttpService) {
         super();
         this.http.getData();
-        this.data = this.http.data;
+        this.http.data.subscribe((data) => {
+            this.data = data;
+            console.log("ababab", this.data);
+            this.getTotalSales();
+        });
     }
 
     public avgSpendPerDay () {
@@ -28,7 +32,7 @@ export class LineChartFilters extends Filter {
             "Amount Spent (£)",
             processedData[1],
             ChartTypes.lineChart
-        )
+        );
     }
 
     private getAverageTotalSpentAgainstSeries (series: string): Array<any> {
@@ -50,16 +54,16 @@ export class LineChartFilters extends Filter {
     }
 
     public getTotalSales () {
-        let totalStores: Set<string> = new Set();
+        const totalStores: Set<string> = new Set();
         let totalSales = [];
         for (let i = 1; i < Object.keys(this.data).length; i++) {
             totalStores.add(this.data[i]["outlet_name"]);
         }
         let index = 0;
         totalStores.forEach((store) => {
-            for (let i = 0; i < Object.keys(this.data).length; i++){
-                if(this.data[i]["outlet_name"] === store){
-                    if(totalSales[index] === void 0) {
+            for (let i = 0; i < Object.keys(this.data).length; i++) {
+                if (this.data[i]["outlet_name"] === store) {
+                    if (totalSales[index] === void 0) {
                         totalSales.push(0);
                     }
                     totalSales[index] += Number(this.data[i]["total_amount"]);
@@ -74,7 +78,7 @@ export class LineChartFilters extends Filter {
             "Amount Spent (£)",
             totalSales,
             ChartTypes.barChart
-        )
+        );
         console.log(totalStores, totalSales);
     }
 }
