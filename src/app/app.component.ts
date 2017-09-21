@@ -9,8 +9,8 @@ import { SelectItem } from "primeng/primeng";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  storeData: boolean;
-  options: Array<string> = [
+  public storeData: boolean;
+  public options: Array<string> = [
     "Daily Report",
     "Tribe Data",
     "Store Data"

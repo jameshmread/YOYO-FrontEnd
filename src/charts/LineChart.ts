@@ -85,7 +85,7 @@ export class LineChart {
     this.options = this.refreshOptions();
   }
 
-  private update (event, newChartType: string) {
+  public update (event, newChartType: string) {
     this.type = newChartType;
     console.log(event);
     this.refreshChart(newChartType);
