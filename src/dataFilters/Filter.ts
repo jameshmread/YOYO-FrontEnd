@@ -1,9 +1,15 @@
 export class Filter {
-    public chartLabels;
-    public chartTitle: string;
-    public dataSetLabels: string;
-    public chartData: Array<number>;
-    public chartType: string;
+
+    public readonly FILTER_LIST = [
+        "Total Revenue Per Store",
+        "Average Transaction Value Per Store"
+        ];
+
+        public chartLabels;
+        public chartTitle: string;
+        public dataSetLabels: string;
+        public chartData: Array<number>;
+        public chartType: string;
 
     public setChartAttributes(
         labels: Array<string>,

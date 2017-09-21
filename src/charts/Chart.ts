@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 import { HttpService } from "../services/HttpService";
 import { ChartColours } from "./ChartColours";
@@ -20,18 +20,11 @@ export class Chart {
   public data: IChartData;
   public options: IChartOptions;
 
-  public chartFilters = [
-    "Total Revenue Per Store",
-    "Average Value of Transactions"
-  ];
+  public chartFilters = this.filters.FILTER_LIST;
 
-  public ngOninit () {
-    this.setBlankChart();
-  }
 
   constructor(private filters: LineChartFilters, private http: HttpService) {
-    // this.filters.getTotalSales();
-    // this.setChartData();
+    this.setBlankChart();
   }
 
   private setBlankChart() {

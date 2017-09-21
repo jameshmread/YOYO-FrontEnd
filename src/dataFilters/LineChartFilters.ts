@@ -15,7 +15,7 @@ export class LineChartFilters extends Filter {
         this.http.getData();
         this.http.data.subscribe((data) => {
             this.data = data;
-            this.getTotalSales();
+            //this.getTotalSales();
         });
     }
 
