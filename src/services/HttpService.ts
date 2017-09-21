@@ -6,7 +6,6 @@ import * as data from "../testData.json";
 @Injectable()
 export class HttpService {
     data;
-    apiData;
     arrayOfDataNames = [
         "Date & Time",
         "Retailer Ref",
@@ -41,7 +40,6 @@ export class HttpService {
         // this.apiData = this.http.get("api/transactions/recent")
         // .subscribe(res => res.json());
         this.parseData();
-        console.log("hello", this.apiData);
         this.data = data;
     }
 
