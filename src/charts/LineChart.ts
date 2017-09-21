@@ -7,7 +7,8 @@ import { ChartTypes } from "./ChartTypes";
 
 @Component({
   selector: "line-chart",
-  templateUrl: "./LineChart.html"
+  templateUrl: "./LineChart.html",
+  styleUrls: ["../app/app.component.css"]
 })
 
 export class LineChart {
@@ -15,6 +16,11 @@ export class LineChart {
   public type;
   public data;
   public options;
+
+  public chartFilters = [
+    "Total Revenue Per Store",
+    "Average Value of Transactions"
+  ];
 
   public ngOninit () {
     this.setBlankChart();

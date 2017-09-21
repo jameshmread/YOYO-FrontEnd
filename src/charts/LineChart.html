@@ -1,12 +1,16 @@
-<div class="row">
-    <div class="col-md-8">
-            <p-chart [type]="type" [data]="data" [options]="options" width="400" height="400">
-            </p-chart>
-    </div>
-        <div class="col-md-4">
-                <div *ngFor="let chart of chartTypes">
-                        <br>
-                        <button type="button" pButton class="btn btn-primary" (click)="update($event, chart)">{{chart}}</button>
+<div class="row card-group">
+        <div class="col-4" *ngFor="let chart of chartTypes">
+                <br>
+                <div class="card">
+                        <button type="button" class="btn btn-primary btn-chartType" (click)="update($event, chart)">{{chart}}</button>
                 </div>
         </div>
+</div>
+<div *ngFor="let filter of chartFilters">
+        <br>
+        <button type="button" class="btn btn-primary" (click)="chooseFilter(filter)">{{filter}}</button>
+</div>
+<div>
+        <p-chart [type]="type" [data]="data" [options]="options" width="400" height="400">
+        </p-chart>
 </div>

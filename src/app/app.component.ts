@@ -9,7 +9,6 @@ import { SelectItem } from "primeng/primeng";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  public storeData: boolean;
   public options: Array<string> = [
     "Daily Report",
     "Tribe Data",
@@ -17,6 +16,5 @@ export class AppComponent {
   ];
 
   public onOptionClick(option: string) {
-    this.storeData = true;
   }
 }

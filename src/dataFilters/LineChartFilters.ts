@@ -15,42 +15,8 @@ export class LineChartFilters extends Filter {
         this.http.getData();
         this.http.data.subscribe((data) => {
             this.data = data;
-            console.log("ababab", this.data);
             this.getTotalSales();
         });
-    }
-
-    public avgSpendPerDay () {
-        const processedData = this.getAverageTotalSpentAgainstSeries("Date & Time");
-        const days: Array<string> = [];
-        this.http.dateTimes.forEach(element => {
-            days.push(this.http.dateTimes[0].split(" ")[0]);
-        });
-        this.setChartAttributes(
-            processedData[0],
-            "Daily Spending Trends of Users",
-            "Amount Spent (£)",
-            processedData[1],
-            ChartTypes.lineChart
-        );
-    }
-
-    private getAverageTotalSpentAgainstSeries (series: string): Array<any> {
-        const seriesLabels = [];
-        let totalAmounts = [];
-        for (let i = 0; i < Object.keys(this.data).length; i++) {
-            const outletNameIndex = seriesLabels.indexOf(this.data[i][series]);
-            if (outletNameIndex < 0) {
-                seriesLabels.push(this.data[i][series]);
-                totalAmounts.push(Number(this.data[i]["Total Amount"]));
-            } else {
-                totalAmounts[outletNameIndex] += Number(this.data[i]["Total Amount"]);
-            }
-        }
-        totalAmounts = MathsFunctions.roundArrayContents(totalAmounts, 2);
-
-        console.log([seriesLabels, totalAmounts]);
-        return [seriesLabels, totalAmounts];
     }
 
     public getTotalSales () {
