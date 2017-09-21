@@ -10,14 +10,14 @@ import { HttpClientModule } from "@angular/common/http";
 import { SelectButtonModule, ChartModule } from "primeng/primeng";
 
 import { AppComponent } from "./app.component";
-import { LineChart } from "../charts/LineChart";
+import { Chart } from "../charts/Chart";
 import { LineChartFilters } from "../dataFilters/LineChartFilters";
 import { HttpService } from "../services/HttpService";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LineChart
+    Chart
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
