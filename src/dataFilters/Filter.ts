@@ -5,17 +5,17 @@ export class Filter {
         "Average Transaction Value Per Store"
         ];
 
-        public chartLabels;
+        public chartLabels: Array<string | number>;
         public chartTitle: string;
         public dataSetLabels: string;
-        public chartData: Array<number>;
+        public chartData: Array<number | string>;
         public chartType: string;
 
     public setChartAttributes(
-        labels: Array<string>,
+        labels: Array<string | number>,
         chartTitle: string,
         dataSetLabels: string,
-        chartData: Array<number>,
+        chartData: Array<number | string>,
         chartType: string
     ) {
         this.chartLabels = labels;
@@ -24,4 +24,6 @@ export class Filter {
         this.chartData = chartData;
         this.chartType = chartType;
     }
+    public getTotalSales() {}
+    public getAverageSalesOfStores() {}
 }

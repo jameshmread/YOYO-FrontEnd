@@ -6,8 +6,10 @@
     "ng": "ng",
     "start": "webpack-dev-server --config ./webpack.config.js",
     "build": "webpack --progress",
+    "build:deploy": "npm run build && npm run deploy",
     "test": "ng test",
-    "lint": "tslint ./src/**/*.ts"
+    "lint": "tslint ./src/**/*.ts",
+    "deploy" : "powershell.exe -command ./deploy.ps1 ./dist/ C:/git/YOYO/YOYO-Industrial-Team-Project/public/js"
   },
   "private": true,
   "dependencies": {

@@ -81,16 +81,15 @@ export class Chart {
     };
   }
 
-  private refreshChart (type: string) {
-    this.type = type;
+  private refreshChart () {
     this.data = this.refreshData();
     this.options = this.refreshOptions();
   }
 
+  // click method to change chart type
   public update (event, newChartType: string) {
     this.type = newChartType;
-    console.log(event);
-    this.refreshChart(newChartType);
+    this.refreshChart();
   }
 
   private refreshData (): IChartData {
@@ -99,8 +98,8 @@ export class Chart {
       datasets: [
         {
           label: this.filters.dataSetLabels,
-          backgroundColor: ChartColours.blueFull,
-          borderColor: ChartColours.red,
+          backgroundColor: ChartColours.red,
+          borderColor: ChartColours.blueFull,
           data: this.filters.chartData
         }
       ]
@@ -120,5 +119,18 @@ export class Chart {
       responsive: true,
       maintainAspectRatio: false
     };
+  }
+
+  public chooseFilter(filter: string) {
+    console.log(filter);
+    switch (filter) {
+      case (this.filters.FILTER_LIST[0]) :
+        this.filters.getTotalSales();
+      break;
+      case (this.filters.FILTER_LIST[1]) :
+        this.filters.getAverageSalesOfStores();
+      break;
+    }
+    this.refreshChart();
   }
 }

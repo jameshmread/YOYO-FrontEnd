@@ -12,39 +12,58 @@ export class LineChartFilters extends Filter {
 
     constructor(private http: HttpService) {
         super();
-        this.http.getData();
+
+    }
+
+    public getTotalSales() {
+        this.http.getData("transactions/totalsales");
         this.http.data.subscribe((data) => {
-            this.data = data;
-            //this.getTotalSales();
+            const info = this.createLabelDataArrays(
+                Object.keys(data).length,
+                data,
+                "outlet_name",
+                "total_sales"
+            );
+            this.setChartAttributes(
+                info[0],
+                "Total Transaction Value Per Outlet",
+                "Amount Spent (£)",
+                info[1],
+                ChartTypes.barChart
+            );
         });
     }
 
-    public getTotalSales () {
-        const totalStores: Set<string> = new Set();
-        let totalSales = [];
-        for (let i = 1; i < Object.keys(this.data).length; i++) {
-            totalStores.add(this.data[i]["outlet_name"]);
-        }
-        let index = 0;
-        totalStores.forEach((store) => {
-            for (let i = 0; i < Object.keys(this.data).length; i++) {
-                if (this.data[i]["outlet_name"] === store) {
-                    if (totalSales[index] === void 0) {
-                        totalSales.push(0);
-                    }
-                    totalSales[index] += Number(this.data[i]["total_amount"]);
-                }
-            }
-            index ++;
+    public getAverageSalesOfStores() {
+        this.http.getData("transactions/averagesales");
+        this.http.data.subscribe((data) => {
+           const info = this.createLabelDataArrays(
+               Object.keys(data).length,
+               data,
+               "outlet_name",
+               "average_transaction_value"
+           );
+            this.setChartAttributes(
+                info[0],
+                "Average Transaction Value Per Outlet",
+                "Amount Spent (£)",
+                info[1],
+                ChartTypes.barChart
+            );
         });
-        totalSales = MathsFunctions.roundArrayContents(totalSales, 2);
-        this.setChartAttributes(
-            Array.from(totalStores),
-            "Total Sales Per Outlet",
-            "Amount Spent (£)",
-            totalSales,
-            ChartTypes.barChart
-        );
-        console.log(totalStores, totalSales);
+    }
+
+    private createLabelDataArrays (
+        arrayLength: number,
+        data: Object,
+        labelName: string, dataName: string
+    ) {
+        const labels: Array<string> = [];
+        const chartData: Array<number> = [];
+        for (let i = 0; i < arrayLength; i++) {
+            labels.push(data[i][labelName]);
+            chartData.push(data[i][dataName]);
+        }
+        return [labels, chartData];
     }
 }
