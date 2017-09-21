@@ -18,7 +18,7 @@
  * BROWSER POLYFILLS
  */
 
-import "zone.js/dist/zone";  // Included with Angular CLI.
+// import "zone.js/dist/zone";  // Included with Angular CLI.
 
 /** IE9, IE10 and IE11 requires all of the following polyfills. **/
 // import "core-js/es6/symbol";

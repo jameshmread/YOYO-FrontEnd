@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-md-8">
+            <p-chart [type]="type" [data]="data" [options]="options" width="400" height="400">
+            </p-chart>
+    </div>
+        <div class="col-md-4">
+                <div *ngFor="let chart of chartTypes">
+                        <br>
+                        <button type="button" pButton class="btn btn-primary" (click)="update($event, chart)">{{chart}}</button>
+                </div>
+        </div>
+</div>
