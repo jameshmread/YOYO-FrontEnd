@@ -7,6 +7,7 @@ import { LineChartFilters } from "../dataFilters/LineChartFilters";
 import { IChartOptions } from "../interfaces/IChartOptions";
 import { IChartData } from "../interfaces/IChartData";
 import { ChartTypes } from "./ChartTypes";
+import { PieDoughnut } from "../dataTypes/PieDoughnut";
 
 @Component({
   selector: "chart",
@@ -22,7 +23,6 @@ export class Chart {
 
   public chartFilters = this.filters.FILTER_LIST;
 
-
   constructor(private filters: LineChartFilters, private http: HttpService) {
     this.setBlankChart();
   }
@@ -36,7 +36,7 @@ export class Chart {
           label: "Placeholder",
           backgroundColor: ChartColours.red,
           borderColor: ChartColours.redFull,
-          data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+          data: [0, 1, 2, 3]
         }
       ]
     };
@@ -81,29 +81,34 @@ export class Chart {
     };
   }
 
-  private refreshChart () {
-    this.data = this.refreshData();
-    this.options = this.refreshOptions();
-  }
-
   // click method to change chart type
   public update (event, newChartType: string) {
     this.type = newChartType;
-    this.refreshChart();
+    this.data = this.refreshData(newChartType);
+    this.options = this.refreshOptions();
   }
 
-  private refreshData (): IChartData {
-    return {
-      labels: this.filters.chartLabels,
-      datasets: [
-        {
-          label: this.filters.dataSetLabels,
-          backgroundColor: ChartColours.red,
-          borderColor: ChartColours.blueFull,
-          data: this.filters.chartData
-        }
-      ]
-    };
+  private refreshData (chartType: string): IChartData {
+    switch (chartType) {
+      case ChartTypes.pieChart || ChartTypes.doughnutChart :
+        return new PieDoughnut(
+          this.filters.chartLabels,
+          this.filters.chartData
+        ).data;
+      default:
+      console.log("i got here");
+      return {
+        labels: this.filters.chartLabels,
+        datasets: [
+          {
+            label: this.filters.dataSetLabels,
+            backgroundColor: ChartColours.red,
+            borderColor: ChartColours.blueFull,
+            data: this.filters.chartData
+          }
+        ]
+      };
+    }
   }
 
   private refreshOptions (): IChartOptions {
@@ -131,6 +136,7 @@ export class Chart {
         this.filters.getAverageSalesOfStores();
       break;
     }
-    this.refreshChart();
+    this.data = this.refreshData(this.filters.chartType);
+    this.options = this.refreshOptions();
   }
 }
