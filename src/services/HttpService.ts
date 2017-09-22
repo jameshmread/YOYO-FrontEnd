@@ -38,7 +38,7 @@ export class HttpService {
     public getData (endpoint?: string) {
         // using json as cross origin issues are happening
         // will change to get requests when integrated with backend code
-        return this.http.get("http://127.0.0.1:8000/api/transactions/totalsales")
+        return this.http.get("http://127.0.0.1:8000/api/transactions/uniqueUsersPerStore")
             .subscribe((response) => {
                 console.log("response", response);
                 this.data.next(response);

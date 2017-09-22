@@ -16,7 +16,7 @@ export class LineChartFilters extends Filter {
         this.http.data.subscribe((data) => {
             this.data = data;
             console.log("ababab", this.data);
-            this.getTotalSales();
+            this.getUniqueUsersPerStore();
         });
     }
 
@@ -75,6 +75,34 @@ export class LineChartFilters extends Filter {
         this.setChartAttributes(
             Array.from(totalStores),
             "Total Sales Per Outlet",
+            "Amount Spent (£)",
+            totalSales,
+            ChartTypes.barChart
+        );
+        console.log(totalStores, totalSales);
+    }
+    
+    public getUniqueUsersPerStore () {
+        const totalStores: Set<string> = new Set();
+        let totalSales = [];
+        for (let i = 1; i < Object.keys(this.data).length; i++) {
+            totalStores.add(this.data[i]["outlet_name"]);
+        }
+        let index = 0;
+        totalStores.forEach((store) => {
+            for (let i = 0; i < Object.keys(this.data).length; i++) {
+                if (this.data[i]["outlet_name"] === store) {
+                    if (totalSales[index] === void 0) {
+                        totalSales.push(0);
+                    }
+                    totalSales[index] += 1;
+                }
+            }
+            index ++;
+        });
+        this.setChartAttributes(
+            Array.from(totalStores),
+            "User Retention",
             "Amount Spent (£)",
             totalSales,
             ChartTypes.barChart
