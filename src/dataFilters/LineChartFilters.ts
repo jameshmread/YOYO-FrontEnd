@@ -33,7 +33,7 @@ export class LineChartFilters extends Filter {
             );
         });
     }
-    
+
     public getAverageSalesOfStores() {
         this.http.getData("transactions/averagesales");
         this.http.data.subscribe((data) => {
@@ -52,7 +52,7 @@ export class LineChartFilters extends Filter {
             );
         });
     }
-    
+
     public getUniqueUsersPerStore() {
         this.http.getData("unique-users-per-store");
         this.http.data.subscribe((data) => {
