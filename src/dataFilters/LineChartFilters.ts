@@ -12,73 +12,58 @@ export class LineChartFilters extends Filter {
 
     constructor(private http: HttpService) {
         super();
-        this.http.getData();
+
+    }
+
+    public getTotalSales() {
+        this.http.getData("transactions/totalsales");
         this.http.data.subscribe((data) => {
-            this.data = data;
-            console.log("ababab", this.data);
-            this.getTotalSales();
+            const info = this.createLabelDataArrays(
+                Object.keys(data).length,
+                data,
+                "outlet_name",
+                "total_sales"
+            );
+            this.setChartAttributes(
+                info[0],
+                "Total Transaction Value Per Outlet",
+                "Amount Spent (£)",
+                info[1],
+                ChartTypes.barChart
+            );
         });
     }
 
-    public avgSpendPerDay () {
-        const processedData = this.getAverageTotalSpentAgainstSeries("Date & Time");
-        const days: Array<string> = [];
-        this.http.dateTimes.forEach(element => {
-            days.push(this.http.dateTimes[0].split(" ")[0]);
+    public getAverageSalesOfStores() {
+        this.http.getData("transactions/averagesales");
+        this.http.data.subscribe((data) => {
+           const info = this.createLabelDataArrays(
+               Object.keys(data).length,
+               data,
+               "outlet_name",
+               "average_transaction_value"
+           );
+            this.setChartAttributes(
+                info[0],
+                "Average Transaction Value Per Outlet",
+                "Amount Spent (£)",
+                info[1],
+                ChartTypes.barChart
+            );
         });
-        this.setChartAttributes(
-            processedData[0],
-            "Daily Spending Trends of Users",
-            "Amount Spent (£)",
-            processedData[1],
-            ChartTypes.lineChart
-        );
     }
 
-    private getAverageTotalSpentAgainstSeries (series: string): Array<any> {
-        const seriesLabels = [];
-        let totalAmounts = [];
-        for (let i = 0; i < Object.keys(this.data).length; i++) {
-            const outletNameIndex = seriesLabels.indexOf(this.data[i][series]);
-            if (outletNameIndex < 0) {
-                seriesLabels.push(this.data[i][series]);
-                totalAmounts.push(Number(this.data[i]["Total Amount"]));
-            } else {
-                totalAmounts[outletNameIndex] += Number(this.data[i]["Total Amount"]);
-            }
+    private createLabelDataArrays (
+        arrayLength: number,
+        data: Object,
+        labelName: string, dataName: string
+    ) {
+        const labels: Array<string> = [];
+        const chartData: Array<number> = [];
+        for (let i = 0; i < arrayLength; i++) {
+            labels.push(data[i][labelName]);
+            chartData.push(data[i][dataName]);
         }
-        totalAmounts = MathsFunctions.roundArrayContents(totalAmounts, 2);
-
-        console.log([seriesLabels, totalAmounts]);
-        return [seriesLabels, totalAmounts];
-    }
-
-    public getTotalSales () {
-        const totalStores: Set<string> = new Set();
-        let totalSales = [];
-        for (let i = 1; i < Object.keys(this.data).length; i++) {
-            totalStores.add(this.data[i]["outlet_name"]);
-        }
-        let index = 0;
-        totalStores.forEach((store) => {
-            for (let i = 0; i < Object.keys(this.data).length; i++) {
-                if (this.data[i]["outlet_name"] === store) {
-                    if (totalSales[index] === void 0) {
-                        totalSales.push(0);
-                    }
-                    totalSales[index] += Number(this.data[i]["total_amount"]);
-                }
-            }
-            index ++;
-        });
-        totalSales = MathsFunctions.roundArrayContents(totalSales, 2);
-        this.setChartAttributes(
-            Array.from(totalStores),
-            "Total Sales Per Outlet",
-            "Amount Spent (£)",
-            totalSales,
-            ChartTypes.barChart
-        );
-        console.log(totalStores, totalSales);
+        return [labels, chartData];
     }
 }

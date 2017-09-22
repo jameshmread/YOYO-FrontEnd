@@ -1,4 +1,11 @@
 .btn-primary{
     background-color: #DA04A4;
+    border-color: #007bff;
+    color: white;
+}
+
+.btn-chartType {
+    background-color: #007bff;
+    border-color: #DA04A4;
     color: white;
 }
