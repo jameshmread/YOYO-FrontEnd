@@ -37,16 +37,35 @@ export class LineChartFilters extends Filter {
     public getAverageSalesOfStores() {
         this.http.getData("transactions/averagesales");
         this.http.data.subscribe((data) => {
-           const info = this.createLabelDataArrays(
-               Object.keys(data).length,
-               data,
-               "outlet_name",
-               "average_transaction_value"
-           );
+            const info = this.createLabelDataArrays(
+                Object.keys(data).length,
+                data,
+                "outlet_name",
+                "average_transaction_value"
+            );
             this.setChartAttributes(
                 info[0],
                 "Average Transaction Value Per Outlet",
                 "Amount Spent (£)",
+                info[1],
+                ChartTypes.barChart
+            );
+        });
+    }
+
+    public getUniqueUsersPerStore() {
+        this.http.getData("unique-users-per-store");
+        this.http.data.subscribe((data) => {
+            const info = this.createLabelDataArrays(
+                Object.keys(data).length,
+                data,
+                "store",
+                "customers"
+            );
+            this.setChartAttributes(
+                info[0],
+                "Unique Users",
+                "Store",
                 info[1],
                 ChartTypes.barChart
             );
