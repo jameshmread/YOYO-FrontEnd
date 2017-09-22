@@ -3,4 +3,5 @@ export class ChartColours {
     public static red = "rgba(240,20,30, 0.5)";
     public static redFull = "rgba(255,0,0, 1)";
     public static blueFull = "rgba(20,30,255, 1)";
+    public static noFill = "rgba(0,0,0,0)";
 }
