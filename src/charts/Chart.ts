@@ -34,8 +34,8 @@ export class Chart {
       datasets: [
         {
           label: "Placeholder",
-          backgroundColor: ChartColours.red,
-          borderColor: ChartColours.redFull,
+          backgroundColor: ChartColours.pink,
+          borderColor: ChartColours.black,
           data: [0, 1, 2, 3]
         }
       ]
@@ -53,7 +53,7 @@ export class Chart {
       maintainAspectRatio: false
     };
   }
-
+  // feel like this should be deprecated
   public setChartData () {
     this.type = this.filters.chartType;
     this.data = {
@@ -88,22 +88,31 @@ export class Chart {
     this.options = this.refreshOptions();
   }
 
-  private refreshData (chartType: string): IChartData {
+  private refreshData (chartType: string) {
     switch (chartType) {
-      case ChartTypes.pieChart || ChartTypes.doughnutChart :
+      case (ChartTypes.pieChart) :
+        return new PieDoughnut(
+          this.filters.chartLabels,
+          this.filters.chartData
+        ).data;
+      case (ChartTypes.doughnutChart) :
+        return new PieDoughnut(
+          this.filters.chartLabels,
+          this.filters.chartData
+        ).data;
+      case (ChartTypes.polarAreaChart) :
         return new PieDoughnut(
           this.filters.chartLabels,
           this.filters.chartData
         ).data;
       default:
-      console.log("i got here");
       return {
         labels: this.filters.chartLabels,
         datasets: [
           {
             label: this.filters.dataSetLabels,
-            backgroundColor: ChartColours.red,
-            borderColor: ChartColours.blueFull,
+            backgroundColor: ChartColours.getChartColours(this.filters.chartData.length),
+            borderColor: ChartColours.black,
             data: this.filters.chartData
           }
         ]

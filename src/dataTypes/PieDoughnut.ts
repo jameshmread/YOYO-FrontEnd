@@ -12,7 +12,7 @@ export class PieDoughnut {
                 {
                     data: datasets,
                     backgroundColor: ChartColours.getChartColours(datasets.length),
-                    hoverBackgroundColor: ChartColours.getChartColours(datasets.length)
+                    hoverBackgroundColor: ChartColours.getChartColours(datasets.length),
                 }]
         };
     }

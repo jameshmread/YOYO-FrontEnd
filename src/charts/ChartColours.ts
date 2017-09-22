@@ -10,8 +10,8 @@ export class ChartColours {
     public static black = "rgba(0,0,0,1)";
     public static yellow = "rgba(255,255,51,1)";
     public static colourList = [
-        "rgba(255,0,0, 1)",
-        "rgba(255,255,0, 1)",
+        "rgba(240,0,0, 0.8)",
+        "rgba(255,255,51, 1)",
         "rgba(255,0,255, 1)",
         "rgba(0,255,0, 1)",
         "rgba(100,255,255,1)",
