@@ -9,7 +9,7 @@
     "build:deploy": "npm run build && npm run deploy",
     "test": "ng test",
     "lint": "tslint ./src/**/*.ts",
-    "deploy" : "powershell.exe -command ./deploy.ps1 ./dist/ C:/git/YOYO/YOYO-Industrial-Team-Project/public/js"
+    "deploy": "powershell.exe -command ./deploy.ps1 ./dist/ C:/git/YOYO/YOYO-Industrial-Team-Project/public/js"
   },
   "private": true,
   "dependencies": {
