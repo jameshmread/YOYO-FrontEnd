@@ -12,7 +12,6 @@ export class LineChartFilters extends Filter {
 
     constructor(private http: HttpService) {
         super();
-
     }
 
     public getTotalSales() {
@@ -37,6 +36,8 @@ export class LineChartFilters extends Filter {
     public getAverageSalesOfStores() {
         this.http.getData("transactions/averagesales");
         this.http.data.subscribe((data) => {
+            this.averageSalesOverTime(data);
+
            const info = this.createLabelDataArrays(
                Object.keys(data).length,
                data,

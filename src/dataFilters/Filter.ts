@@ -26,4 +26,14 @@ export class Filter {
     }
     public getTotalSales() {}
     public getAverageSalesOfStores() {}
+
+    public averageSalesOverTime (data: any) {
+        for (let i = 0; i < Object.keys(data).length; i++) {
+            const entry = data[i][Object.keys(data[i]).toString()];
+            console.log(Object.keys(data[i]));
+            for (let j = 0; j < entry.length; j++) {
+                console.log(entry[j]);
+            }
+        }
+    }
 }
