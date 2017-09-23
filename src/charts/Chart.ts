@@ -140,9 +140,12 @@ export class Chart {
     switch (filter) {
       case (this.filters.FILTER_LIST[0]) :
         this.filters.getTotalSales();
-      break;
+        break;
       case (this.filters.FILTER_LIST[1]) :
         this.filters.getAverageSalesOfStores();
+      break;
+      case (this.filters.FILTER_LIST[3]) :
+        this.filters.getUniqueUsersPerStore();
       break;
     }
     this.data = this.refreshData(this.filters.chartType);
