@@ -7,7 +7,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
-import { SelectButtonModule, ChartModule } from "primeng/primeng";
+import { SelectButtonModule, ChartModule, CalendarModule } from "primeng/primeng";
 
 import { AppComponent } from "./app.component";
 import { Chart } from "../charts/Chart";
@@ -28,8 +28,9 @@ import { HttpService } from "../services/HttpService";
     FormsModule,
     SelectButtonModule,
     ChartModule,
-    HttpClientModule
-  ],
+    HttpClientModule,
+    CalendarModule
+    ],
   providers: [
     LineChartFilters,
     HttpService

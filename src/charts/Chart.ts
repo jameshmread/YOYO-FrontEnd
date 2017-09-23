@@ -16,6 +16,7 @@ import { PieDoughnut } from "../dataTypes/PieDoughnut";
 })
 
 export class Chart {
+  public dateRange = [new Date("2015-01-01"), new Date("2017-01-01")];
   public chartTypes: Array<string> = ChartTypes.chartList;
   public type: string;
   public data: IChartData;
@@ -142,7 +143,7 @@ export class Chart {
         this.filters.getTotalSales();
         break;
       case (this.filters.FILTER_LIST[1]) :
-        this.filters.getAverageSalesOfStores();
+        this.filters.getAverageSalesOfStores(this.dateRange[0], this.dateRange[1]);
       break;
       case (this.filters.FILTER_LIST[2]) :
         this.filters.getUserRetentionPerStore();

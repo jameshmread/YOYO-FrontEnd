@@ -10,6 +10,17 @@
         <br>
         <button type="button" class="btn btn-primary" (click)="chooseFilter(filter)">{{filter}}</button>
 </div>
+<div class="container">
+        <h3>Range</h3>
+        <p-calendar
+        [(ngModel)]="dateRange"
+        selectionMode="range"
+        readonlyInput="true"
+        [monthNavigator]="true" 
+        [yearNavigator]="true"
+        yearRange="2010:2100"
+        ></p-calendar>
+</div>
 <div>
         <p-chart [type]="type" [data]="data" [options]="options" width="400" height="400">
         </p-chart>

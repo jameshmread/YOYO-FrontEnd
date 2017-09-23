@@ -25,8 +25,10 @@ export class Filter {
         this.dataSetLabels = dataSetLabels;
         this.chartData = chartData;
         this.chartType = chartType;
+        console.log("Labels and Chart Data", labels, chartData);
     }
     public getTotalSales() {}
-    public getAverageSalesOfStores() {}
+    public getAverageSalesOfStores(startDate: Date, endDate: Date) {}
+    public getAverageSalesOverTime() {}
     public getUserRetentionPerStore() {}
 }
