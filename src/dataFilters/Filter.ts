@@ -3,7 +3,7 @@ export class Filter {
     public readonly FILTER_LIST = [
         "Total Revenue Per Store",
         "Average Transaction Value Per Store",
-        "",
+        "User Retention Per Store",
         "Unique Users Per Store"
         ];
 
@@ -25,10 +25,10 @@ export class Filter {
         this.dataSetLabels = dataSetLabels;
         this.chartData = chartData;
         this.chartType = chartType;
-        console.log("dd", labels, chartData);
+        console.log("Labels and Chart Data", labels, chartData);
     }
     public getTotalSales() {}
     public getAverageSalesOfStores(startDate: Date, endDate: Date) {}
     public getAverageSalesOverTime() {}
-
+    public getUserRetentionPerStore() {}
 }
