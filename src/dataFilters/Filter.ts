@@ -28,5 +28,5 @@ export class Filter {
     }
     public getTotalSales() {}
     public getAverageSalesOfStores() {}
-    public getUserRetentionPerStore(){}
+    public getUserRetentionPerStore() {}
 }

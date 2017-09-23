@@ -71,7 +71,7 @@ export class LineChartFilters extends Filter {
             );
         });
     }
-    
+
     public getUserRetentionPerStore() {
         this.http.getData("transactions/uniqueUsersPerStore");
         this.http.data.subscribe((data) => {
