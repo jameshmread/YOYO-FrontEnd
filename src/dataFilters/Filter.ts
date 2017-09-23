@@ -3,7 +3,7 @@ export class Filter {
     public readonly FILTER_LIST = [
         "Total Revenue Per Store",
         "Average Transaction Value Per Store",
-        "",
+        "User Retention Per Store",
         "Unique Users Per Store"
         ];
 
@@ -28,4 +28,5 @@ export class Filter {
     }
     public getTotalSales() {}
     public getAverageSalesOfStores() {}
+    public getUserRetentionPerStore() {}
 }
