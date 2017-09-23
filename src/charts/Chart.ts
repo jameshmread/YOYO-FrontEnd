@@ -130,6 +130,9 @@ export class Chart {
       case (this.filters.FILTER_LIST[1]) :
         this.filters.getAverageSalesOfStores();
       break;
+      case (this.filters.FILTER_LIST[2]) :
+        this.filters.getUserRetentionPerStore();
+      break;
       case (this.filters.FILTER_LIST[3]) :
         this.filters.getUniqueUsersPerStore();
       break;
