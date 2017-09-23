@@ -36,7 +36,7 @@ export class LineChartFilters extends Filter {
     public getAverageSalesOfStores() {
         this.http.getData("transactions/averagesales");
         this.http.data.subscribe((data) => {
-            this.averageSalesOverTime(data);
+            this.averageSalesOverTime(data, new Date("2000-08-19"), new Date("2018-08-19"));
 
            const info = this.createLabelDataArrays(
                Object.keys(data).length,

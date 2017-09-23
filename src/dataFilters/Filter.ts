@@ -27,13 +27,24 @@ export class Filter {
     public getTotalSales() {}
     public getAverageSalesOfStores() {}
 
-    public averageSalesOverTime (data: any) {
+    public averageSalesOverTime (data: any, start: Date, end: Date) {
+        const saleRange = [];
         for (let i = 0; i < Object.keys(data).length; i++) {
-            const entry = data[i][Object.keys(data[i]).toString()];
-            console.log(Object.keys(data[i]));
+            const outletName = Object.keys(data[i]).toString();
+            console.log(outletName);
+            let outletValue = 0;
+            const entry = data[i][outletName.toString()];
             for (let j = 0; j < entry.length; j++) {
-                console.log(entry[j]);
+                const currentDate = new Date(entry[j]["date"].toString().split(" ")[0]);
+                if (currentDate >= start && currentDate <= end) {
+                    outletValue += Number(entry[j]["total_amount"]);
+                }
+                // console.log(entry[j]["total_amount"], new Date(entry[j]["date"].toString().split(" ")[0]));
+                console.log(outletName, outletValue);
+
             }
+            saleRange.push([outletName, outletValue]);
         }
+        console.log("hello", saleRange);
     }
 }
