@@ -70,6 +70,25 @@ export class LineChartFilters extends Filter {
         return saleRange;
     }
 
+    public getUniqueUsersPerStore() {
+        this.http.getData("unique-users-per-store");
+        this.http.data.subscribe((data) => {
+            const info = this.createLabelDataArrays(
+                Object.keys(data).length,
+                data,
+                "store",
+                "customers"
+            );
+            this.setChartAttributes(
+                info[0],
+                "Unique Users",
+                "Store",
+                info[1],
+                ChartTypes.barChart
+            );
+        });
+    }
+
     private createLabelDataArrays (
         arrayLength: number,
         data: Object,

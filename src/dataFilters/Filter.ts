@@ -2,7 +2,9 @@ export class Filter {
 
     public readonly FILTER_LIST = [
         "Total Revenue Per Store",
-        "Average Transaction Value Per Store"
+        "Average Transaction Value Per Store",
+        "",
+        "Unique Users Per Store"
         ];
 
         public chartLabels: Array<string | number>;
