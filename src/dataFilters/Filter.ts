@@ -23,28 +23,10 @@ export class Filter {
         this.dataSetLabels = dataSetLabels;
         this.chartData = chartData;
         this.chartType = chartType;
+        console.log("dd", labels, chartData);
     }
     public getTotalSales() {}
-    public getAverageSalesOfStores() {}
+    public getAverageSalesOfStores(startDate: Date, endDate: Date) {}
+    public getAverageSalesOverTime() {}
 
-    public averageSalesOverTime (data: any, start: Date, end: Date) {
-        const saleRange = [];
-        for (let i = 0; i < Object.keys(data).length; i++) {
-            const outletName = Object.keys(data[i]).toString();
-            console.log(outletName);
-            let outletValue = 0;
-            const entry = data[i][outletName.toString()];
-            for (let j = 0; j < entry.length; j++) {
-                const currentDate = new Date(entry[j]["date"].toString().split(" ")[0]);
-                if (currentDate >= start && currentDate <= end) {
-                    outletValue += Number(entry[j]["total_amount"]);
-                }
-                // console.log(entry[j]["total_amount"], new Date(entry[j]["date"].toString().split(" ")[0]));
-                console.log(outletName, outletValue);
-
-            }
-            saleRange.push([outletName, outletValue]);
-        }
-        console.log("hello", saleRange);
-    }
 }

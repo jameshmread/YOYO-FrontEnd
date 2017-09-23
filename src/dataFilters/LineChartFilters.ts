@@ -33,25 +33,41 @@ export class LineChartFilters extends Filter {
         });
     }
 
-    public getAverageSalesOfStores() {
+    public getAverageSalesOfStores(startDate: Date, endDate: Date) {
         this.http.getData("transactions/averagesales");
         this.http.data.subscribe((data) => {
-            this.averageSalesOverTime(data, new Date("2000-08-19"), new Date("2018-08-19"));
-
-           const info = this.createLabelDataArrays(
-               Object.keys(data).length,
-               data,
-               "outlet_name",
-               "average_transaction_value"
-           );
+            const filteredData = this.averageSalesOverTime(data, startDate, endDate);
+            const chartLabels = [];
+            const chartData = [];
+            for (let i = 0; i < filteredData.length; i++) {
+                chartLabels.push(filteredData[i][0]);
+                chartData.push(filteredData[i][1]);
+            }
             this.setChartAttributes(
-                info[0],
-                "Average Transaction Value Per Outlet",
+                chartLabels,
+                "Average Transaction Value from: " + startDate + " to " + endDate,
                 "Amount Spent (£)",
-                info[1],
+                chartData,
                 ChartTypes.barChart
             );
         });
+    }
+
+    public averageSalesOverTime(data: Object, start: Date, end: Date): Array<Array<any>> {
+        const saleRange = [];
+        for (let i = 0; i < Object.keys(data).length; i++) {
+            const outletName = Object.keys(data[i]).toString();
+            let outletValue = 0;
+            const entry = data[i][outletName.toString()];
+            for (let j = 0; j < entry.length; j++) {
+                const currentDate = new Date(entry[j]["date"].toString().split(" ")[0]);
+                if (currentDate >= start && currentDate <= end) {
+                    outletValue += Number(entry[j]["total_amount"]);
+                }
+            }
+            saleRange.push([outletName, outletValue ]);
+        }
+        return saleRange;
     }
 
     private createLabelDataArrays (

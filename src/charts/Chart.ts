@@ -142,7 +142,7 @@ export class Chart {
         this.filters.getTotalSales();
       break;
       case (this.filters.FILTER_LIST[1]) :
-        this.filters.getAverageSalesOfStores();
+        this.filters.getAverageSalesOfStores(new Date("2015-01-01"), new Date("2019-01-01"));
       break;
     }
     this.data = this.refreshData(this.filters.chartType);
