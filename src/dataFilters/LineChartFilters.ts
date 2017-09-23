@@ -72,6 +72,25 @@ export class LineChartFilters extends Filter {
         });
     }
 
+    public getUserRetentionPerStore() {
+        this.http.getData("transactions/uniqueUsersPerStore");
+        this.http.data.subscribe((data) => {
+            const info = this.createLabelDataArrays(
+                Object.keys(data).length,
+                data,
+                "store",
+                "total_users_retained"
+            );
+            this.setChartAttributes(
+                info[0],
+                "Customers Retained Per Store",
+                "Customers",
+                info[1],
+                ChartTypes.barChart
+            );
+        });
+    }
+
     private createLabelDataArrays (
         arrayLength: number,
         data: Object,
